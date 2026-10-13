@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="ApparelMakeableBase" Name="SLPPR_FootwearBase" Abstract="True">
+    <defName>SLPPR_FootwearBase</defName>
+    <label>footwear</label>
+    <description>A piece of footwear.</description>
+    <graphicData>
+      <!-- Placeholder, overridden in derived classes -->
+      <texPath>Things/Footwear/Placeholder</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <techLevel>Neolithic</techLevel>
+    <tradeability>Sellable</tradeability>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+    <statBases>
+      <!-- Common stat bases -->
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>2400</WorkToMake>
+      <Mass>0.25</Mass>
+      <EquipDelay>1.0</EquipDelay>
+      <!-- These can be overridden or adjusted in derived classes -->
+    </statBases>
+    <equippedStatOffsets>
+      <!-- Common stat offsets -->
+    </equippedStatOffsets>
+    <thingCategories Inherit="False">
+      <li>SLPPR_HandAndFoot</li>
+    </thingCategories>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>Feet</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>IndustrialBasic</li>
+        <li>IndustrialAdvanced</li>
+        <li>Royal</li>
+        <li>Worker</li>
+        <li>Neolithic</li>
+      </tags>
+    </apparel>
+    <recipeMaker>
+      <researchPrerequisite>ComplexClothing</researchPrerequisite>
+      <recipeUsers Inherit="False">
+        <li>ElectricTailoringBench</li>
+        <li>HandTailoringBench</li>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+    </recipeMaker>
+    <colorGenerator Class="ColorGenerator_StandardApparel"/>
+    <comps>
+      <li Class="SlippersNmSpc.CompProperties_DynamicApparelComps" />
+    </comps>
+    <tickerType>Rare</tickerType>
+  </ThingDef>
+
+  <ThingDef ParentName="SLPPR_FootwearBase" Name="SLPPR_Footwear_Slippers">
+    <defName>SLPPR_Footwear_Slippers</defName>
+    <label>slippers</label>
+    <description>A pair of slippers designed to provide comfort and elegance. Slippers are a symbol of luxury, offering comfort and cleanliness for discerning wearers.</description>
+    <graphicData>
+      <texPath>Things/Footwear/Slippers</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <generateCommonality>2</generateCommonality>
+    <costStuffCount>60</costStuffCount>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToMake>2400</WorkToMake>
+      <Mass>0.25</Mass>
+      <Comfort>0.15</Comfort>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.05</MoveSpeed>
+      <HuntingStealth>0.15</HuntingStealth>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="SlippersNmSpc.CompProperties_DynamicApparelComps" />
+      <!--
+      <li Class="SlippersNmSpc.CompProperties_FilthReducer">
+        <cleanInterval>2500</cleanInterval>
+      </li>
+       <li Class="SlippersNmSpc.CompProperties_Dumb" /> -->
+      <!--
+      <li Class="SlippersNmSpc.CompProperties_QualityEffects" />
+      <li Class="SlippersNmSpc.CompProperties_FilthReducer">
+        <cleanInterval>2500</cleanInterval>
+      </li>
+      -->
+    </comps>
+    <tickerType>Rare</tickerType>
+    <apparel>
+      <tags>
+        <li>IndustrialBasic</li>
+        <li>Royal</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="SLPPR_FootwearBase" Name="SLPPR_Footwear_Moccasins">
+    <defName>SLPPR_Footwear_Moccasins</defName>
+    <label>moccasins</label>
+    <description>A pair of moccasins: supple, lightweight shoes suitable for hunting, fieldwork and running.</description>
+    <graphicData>
+      <texPath>Things/Footwear/Moccasins</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <generateCommonality>1.5</generateCommonality>
+    <costStuffCount>70</costStuffCount>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>2800</WorkToMake>
+      <Mass>0.25</Mass>
+      <Comfort>0.15</Comfort>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>0.05</MoveSpeed>
+      <HuntingStealth>0.25</HuntingStealth>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="SlippersNmSpc.CompProperties_DynamicApparelComps" />
+      <!--  <li Class="SlippersNmSpc.CompProperties_Dumb" /> -->
+      <!--
+      <li Class="SlippersNmSpc.CompProperties_QualityEffects" />
+      -->
+    </comps>
+    <tickerType>Rare</tickerType>
+    <apparel>
+      <tags>
+        <li>Neolithic</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="SLPPR_FootwearBase" Name="SLPPR_Footwear_Mukluks">
+    <defName>SLPPR_Footwear_Mukluks</defName>
+    <label>mukluks</label>
+    <description>A pair of soft, tall boots sewn from fabric or leather, designed for warmth and comfort in cold climates. Mukluks provide excellent insulation and improve mobility, making them a favorite for harsh environments.</description>
+    <graphicData>
+      <texPath>Things/Footwear/Mukluks</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <generateCommonality>1.5</generateCommonality>
+    <costStuffCount>80</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>3200</WorkToMake>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.55</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.85</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.08</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <HuntingStealth>0.35</HuntingStealth>
+      <MoveSpeed>0.2</MoveSpeed>
+    </equippedStatOffsets>
+    <tickerType>Rare</tickerType>
+    <apparel>
+      <tags>
+        <li>Neolithic</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="SLPPR_FootwearBase" Name="SLPPR_Footwear_CruelShoes">
+    <defName>SLPPR_Footwear_CruelShoes</defName>
+    <label>cruel shoes</label>
+    <description>A bizarre creation of a twisted designer, these shoes are both painful and constraining, with no discernible benefit other than a perverse sense of style.</description>
+    <graphicData>
+      <texPath>Things/Footwear/CruelShoes</texPath>
+    </graphicData>
+    <generateCommonality>0.1</generateCommonality>
+    <costStuffCount>150</costStuffCount>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>8000</WorkToMake>
+      <Mass>0.2</Mass>
+      <Comfort>-0.5</Comfort> <!-- Actively reduces comfort -->
+    </statBases>
+    <tickerType>Rare</tickerType>
+    <apparel>
+      <tags>
+        <li>Royal</li>
+        <li>Fashion</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+  
+</Defs>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <HediffDef>
+        <defName>DebilitatingPain</defName>
+        <label>debilitating pain</label>
+        <labelNoun>a bout of debilitating pain</labelNoun>
+        <description>The wearer is struck by sudden, overwhelming pain, rendering them temporarily incapacitated.</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>550~1240</disappearsAfterTicks> <!-- Randomized duration -->
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.2</setMax> <!-- Dramatic reduction in consciousness -->
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0.5</setMax> <!-- Impaired fine motor skills -->
+                    </li>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <setMax>0.5</setMax> <!-- Slower movement -->
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>LittleFaint</defName>
+        <label>little faint</label>
+        <labelNoun>a small fainting spell</labelNoun>
+        <description>The wearer momentarily loses their composure due to discomfort or stress but recovers quickly.</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>800~1500</disappearsAfterTicks> <!-- Short duration -->
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.6</setMax> <!-- Mild consciousness reduction -->
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0.8</setMax> <!-- Slight fine motor skill impairment -->
+                    </li>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <setMax>0.8</setMax> <!-- Slight movement impairment -->
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>SevereFaint</defName>
+        <label>severe faint</label>
+        <labelNoun>a bout of severe fainting</labelNoun>
+        <description>The wearer is overcome by extreme dizziness and shortness of breath, rendering them incapacitated for a longer duration.</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>1500~3600</disappearsAfterTicks> <!-- Long duration -->
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.15</setMax> <!-- Significant consciousness impairment -->
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <setMax>0.75</setMax> <!-- Moderate respiratory difficulty -->
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0.4</setMax> <!-- Severe fine motor skill impairment -->
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+    
+    
+    
+    
+</Defs>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+
+  <SoundDef>
+    <defName>CatLeapStart</defName>  
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Abilities/LeapStart</clipPath>
+          </li>
+        </grains>      
+        <volumeRange>60</volumeRange>
+        <pitchRange>
+          <min>0.9976015</min>        
+          <max>1.1769372</max>
+        </pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+    <SoundDef>
+    <defName>CatLeapEnd</defName>  
+    <context>MapOnly</context> 
+    <maxSimultaneous>1</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Abilities/LeapEnd</clipPath>
+          </li>
+        </grains>      
+        <volumeRange>60</volumeRange>    
+        <pitchRange>
+          <min>1</min>        
+          <max>1</max>
+        </pitchRange>      
+      </li>    
+    </subSounds>
+  </SoundDef>
+  
+</Defs>

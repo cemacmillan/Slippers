@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- slippers, gloves, soft, sewn footwear -->
+    <ThingCategoryDef>
+        <defName>SLPPR_HandAndFoot</defName>
+        <label>handwear and footwear</label>
+        <parent>Apparel</parent>
+    </ThingCategoryDef>
+
+    <!-- slippers, gloves, soft, sewn footwear -->
+    <ThingCategoryDef>
+        <defName>SLPPR_TopAndBottom</defName>
+        <label>tops and bottoms</label>
+        <parent>Apparel</parent>
+    </ThingCategoryDef>
+</Defs>

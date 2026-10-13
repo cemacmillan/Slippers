@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <!--
+    <AbilityDef>
+        <defName>CatLeap</defName>
+        <label>Cat Leap</label>
+        <description>Cats leap to a distant location with incredible precision and power.</description>
+        <iconPath>UI/Commands/CatLeap</iconPath>
+        <cooldownTicksRange>3000</cooldownTicksRange>
+        <hostile>false</hostile>
+        <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+        <gizmoClass>RimWorld.Command_Ability</gizmoClass>
+        <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+        <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+       
+
+        <verbProperties>
+            <verbClass>DIL_CatsAreCats.Verb_CastAbilityCatLeap</verbClass> 
+            <label>leap</label>
+            <violent>false</violent>
+            <warmupTime>0.5</warmupTime>
+            <range>23</range>
+            <requireLineOfSight>true</requireLineOfSight>
+            <soundCast>CatLeapStart</soundCast>
+            <soundLanding>CatLeapEnd</soundLanding>
+            <targetParams>
+                <canTargetLocations>true</canTargetLocations>
+                <canTargetPawns>false</canTargetPawns>
+                <canTargetBuildings>false</canTargetBuildings>
+            </targetParams>
+        </verbProperties>
+
+        <comps>
+          <li Class="DIL_CatsAreCats.CompProperties_AbilityCatLeap">
+              <jumpRange>23</jumpRange>
+          </li>
+        </comps>
+
+        <jobDef>CastJump</jobDef>
+    </AbilityDef>
+    -->
+</Defs>
