@@ -58,7 +58,7 @@ deploy-dll: build
 
 deploy: deploy-dll
 	@echo "=== Deploying mod to RimWorld ==="
-	cd ${rwproj} ;pwd; tar cpf - ${modname} | (cd /Users/cem/Library/Application\ Support/Steam/steamapps/common/RimWorld/RimWorldMac.app/Mods/ && tar xf -)
+	cd ${rwproj} ;pwd; tar cpf - ${modname} | (cd /Users/cem/Library/Application\ Support/Steam/steamapps/common/RimWorld/Mods/ && tar xf -)
 	@echo "✅ Mod deployed to RimWorld"
 
 clean:
