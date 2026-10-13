@@ -38,5 +38,8 @@ public static class Patch_ApparelTrackerTick
                 }
             }
         }
+
+        MindMattersFormalityBaselineBridge.TryPushForPawn(pawn);
+        FreedomSuppressorBaselineSync.SyncConstraintSlicesForPawn(pawn);
     }
 }

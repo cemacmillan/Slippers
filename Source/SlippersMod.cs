@@ -11,7 +11,6 @@ namespace SlippersNmSpc
         public SlippersMod(ModContentPack content) : base(content)
         {
             Settings = GetSettings<SlippersModSettings>();
-            Settings.ExposeData(); // Ensure settings are loaded properly
             var harmony = new Harmony("cem.slippers");
             harmony.PatchAll();
             Log.Message("<color=#00FF7F>[Slippers]</color>v1.5.2 chez");

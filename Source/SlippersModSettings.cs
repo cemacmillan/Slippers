@@ -10,6 +10,7 @@ public class SlippersModSettings : ModSettings
     public const float FaintingBaseline = 0.013f;
 
     public bool EnableLogging = false;
+    /// <summary>0 = no constraint pinch/faint rolls. Higher = more collapse risk from constraining apparel; quality curve bites harder as this rises.</summary>
     public float FaintingBanality = FaintingBaseline; 
 
     public override void ExposeData()

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using MindMattersInterface;
 using System.Linq;
@@ -59,9 +61,13 @@ public class CompFreedomSuppressor : ThingComp, IDynamicComp
 
         if (wearer != null && wearer.Spawned && cachedNeedSatisfiers != null)
         {
+            PushConstraintBaselineSlices(wearer);
             foreach (DynAppCompModExtension.NeedSatisfier needSatisfier in cachedNeedSatisfiers)
             {
-                DynamicNeeds.UpdateBaseline(wearer, needSatisfier.needDefName, needSatisfier.satisfactionBaseContrib, isAdding: true);
+                if (string.Equals(needSatisfier.needDefName, "ConstraintNeed", StringComparison.Ordinal))
+                    continue;
+                DynamicNeeds.UpdateBaseline(wearer, needSatisfier.needDefName, needSatisfier.satisfactionBaseContrib,
+                    isAdding: true);
             }
         }
     }
@@ -76,15 +82,51 @@ public class CompFreedomSuppressor : ThingComp, IDynamicComp
 
         if (cachedNeedSatisfiers != null)
         {
+            ClearConstraintBaselineSlices(pawn);
             foreach (DynAppCompModExtension.NeedSatisfier needSatisfier in cachedNeedSatisfiers)
             {
-                DynamicNeeds.UpdateBaseline(pawn, needSatisfier.needDefName, needSatisfier.satisfactionBaseContrib, isAdding: false);
+                if (string.Equals(needSatisfier.needDefName, "ConstraintNeed", StringComparison.Ordinal))
+                    continue;
+                DynamicNeeds.UpdateBaseline(pawn, needSatisfier.needDefName, needSatisfier.satisfactionBaseContrib,
+                    isAdding: false);
             }
         }
 
         wearer = null;
         cachedModExtension = null;
         cachedNeedSatisfiers = null;
+    }
+
+    /// <summary>Per-apparel ConstraintNeed slices (idempotent — safe from apparel tick resync).</summary>
+    public void PushConstraintBaselineSlices(Pawn targetPawn)
+    {
+        if (targetPawn == null || cachedNeedSatisfiers == null)
+            return;
+
+        foreach (DynAppCompModExtension.NeedSatisfier needSatisfier in cachedNeedSatisfiers)
+        {
+            if (!string.Equals(needSatisfier.needDefName, "ConstraintNeed", StringComparison.Ordinal))
+                continue;
+
+            string key = BaselineProviders.FreedomSuppressorConstraintKey(parent.thingIDNumber, needSatisfier.needDefName);
+            DynamicNeeds.SetBaselineContributionSlice(targetPawn, needSatisfier.needDefName, key,
+                Mathf.Clamp01(needSatisfier.satisfactionBaseContrib));
+        }
+    }
+
+    public void ClearConstraintBaselineSlices(Pawn targetPawn)
+    {
+        if (targetPawn == null || cachedNeedSatisfiers == null)
+            return;
+
+        foreach (DynAppCompModExtension.NeedSatisfier needSatisfier in cachedNeedSatisfiers)
+        {
+            if (!string.Equals(needSatisfier.needDefName, "ConstraintNeed", StringComparison.Ordinal))
+                continue;
+
+            string key = BaselineProviders.FreedomSuppressorConstraintKey(parent.thingIDNumber, needSatisfier.needDefName);
+            DynamicNeeds.ClearBaselineContributionSlice(targetPawn, needSatisfier.needDefName, key);
+        }
     }
 
     public void onEquippedTick(Pawn pawn)
@@ -133,13 +175,39 @@ public class CompFreedomSuppressor : ThingComp, IDynamicComp
         // Avoid pinch if pain level is already critical
         if (pawn.health.hediffSet.PainTotal > pawn.GetStatValue(StatDefOf.PainShockThreshold)) return;
 
-        float qualityFactor = QualityFactor();
-        float probability = SlippersMod.Settings.FaintingBanality/ qualityFactor; // Higher quality reduces chance
+        float banality = SlippersMod.Settings.FaintingBanality;
+        if (banality <= 0f) return;
+
+        CompQuality compQuality = parent.TryGetComp<CompQuality>();
+        QualityCategory tier = compQuality?.Quality ?? QualityCategory.Normal;
+        float steepDivisor = QualityPinchDivisor(tier);
+        // Banality scales how strongly craft quality reduces pinches: at low banality the curve is flatter;
+        // at high banality, excellent+ items get drastically fewer rolls than awful/poor (Pow steepens with slider).
+        float effectiveDivisor = Mathf.Pow(steepDivisor, Mathf.Clamp01(banality));
+        float probability = Mathf.Clamp01(banality / effectiveDivisor);
 
         if (Rand.Chance(probability))
         {
-            ApplyPinchEffect(pawn, qualityFactor);
+            ApplyPinchEffect(pawn, QualityFactor());
         }
+    }
+
+    /// <summary>
+    /// Higher divisor → lower pinch probability. Awful/poor pinch often; excellent+ is heavily protected.
+    /// </summary>
+    private static float QualityPinchDivisor(QualityCategory q)
+    {
+        return q switch
+        {
+            QualityCategory.Awful => 0.48f,
+            QualityCategory.Poor => 0.62f,
+            QualityCategory.Normal => 1f,
+            QualityCategory.Good => 1.5f,
+            QualityCategory.Excellent => 3.4f,
+            QualityCategory.Masterwork => 8f,
+            QualityCategory.Legendary => 12f,
+            _ => 1f
+        };
     }
 
     private void ApplyPinchEffect(Pawn pawn, float qualityFactor)

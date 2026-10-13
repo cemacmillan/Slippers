@@ -145,7 +145,9 @@ public class CompDynamicApparelComps : ThingComp
         // MMToolkit.DebugLog($"[CompDynamicApparelComps] Attempting to attach comps for {parent.LabelCap}.");
         
         string defName = parent.def.defName;
-        
+        DynAppCompModExtension dynNeedExt = parent.def.GetModExtension<DynAppCompModExtension>();
+        bool hasNeedSatisfierExt = dynNeedExt?.needSatisfiers != null && dynNeedExt.needSatisfiers.Count > 0;
+
         switch (defName)
         {
             case "SLPPR_Footwear_Slippers":
@@ -179,8 +181,18 @@ public class CompDynamicApparelComps : ThingComp
             //
             // [CompDynamicApparelComps] parent.def.defName SLPPR_TrainingCorset isn't recognized.
             default:
-                MMToolkit.GripeOnce($"[CompDynamicApparelComps] parent.def.defName {parent.def.defName} isn't recognized.");
+                if (!hasNeedSatisfierExt)
+                {
+                    MMToolkit.GripeOnce($"[CompDynamicApparelComps] parent.def.defName {parent.def.defName} isn't recognized.");
+                }
                 break;
+        }
+
+        // Need satisfiers (baseline / per-interval satisfaction) are applied by CompFreedomSuppressor reading
+        // DynAppCompModExtension from the ThingDef. Without this comp, modExtensions > needSatisfiers in XML have no effect.
+        if (hasNeedSatisfierExt)
+        {
+            AddComp(typeof(CompFreedomSuppressor));
         }
 
         compsAdded = true;

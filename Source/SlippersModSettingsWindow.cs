@@ -32,7 +32,9 @@ namespace SlippersNmSpc
 
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(contentRect);
-            listing.Label("Just how frequently do people faint?: " + Settings.FaintingBanality.ToString("0.0"));
+            listing.Label(
+                "Constraint pinch / faint pressure (apparel only, not pain-stun): " + Settings.FaintingBanality.ToString("0.00"),
+                tooltip: "0 = off. Higher = more random pinch events from constraining pieces. Better craft quality reduces chance sharply from Good upward; the slider scales how much quality matters.");
             Settings.FaintingBanality = listing.Slider(Settings.FaintingBanality, 0f, 1f);
             // Checkbox for enabling logging
             listing.CheckboxLabeled("Enable Logging", ref Settings.EnableLogging, "EnableLogging");
